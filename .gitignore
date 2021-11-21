@@ -353,6 +353,7 @@ MigrationBackup/
 node_modules/
 dist/
 .browserslistrc
+EndlessTemplate/
 EndlessTemplate/node_modules/
 EndlessTemplate/dist/
 EndlessTemplate/package-lock.json
