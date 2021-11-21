@@ -1,0 +1,15 @@
+
+{
+"auth0": { 
+        "domain": "YOUR DOMAIN NAME",
+        "clientID": "YOUR clientID"
+    },
+"firebase":{
+    "apiKey": "AIzaSyDQpH0wyyvVsIxNpV8zn2cJuBIC_tIQVyI",
+    "authDomain": "fsmanager-74fcb.firebaseapp.com",
+    "databaseURL": "https://fsmanager-74fcb.firebaseio.com",
+    "projectId": "fsmanager-74fcb",
+    "storageBucket": "fsmanager-74fcb.appspot.com",
+    "messagingSenderId": "765756407909"
+}
+}
