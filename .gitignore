@@ -355,3 +355,5 @@ dist/
 .browserslistrc
 EndlessTemplate/node_modules/
 EndlessTemplate/dist/
+EndlessTemplate/package-lock.json
+package-lock.json
