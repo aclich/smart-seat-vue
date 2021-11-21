@@ -19,6 +19,11 @@
             { "path": "/authentication/forgetpassword", "title": "Forget Password", "type": "extTabLink" },
             { "path": "/authentication/resetpassword", "title": "Reset Password", "type": "extTabLink" }
           ]
+        },
+        {
+          "title": "Test_Sample", "icon": "unlock", "type": "sub", "active": false, "children": [
+            {"path": "/sample/2", "title": "Sample_2", "type":"link" }  
+          ]
         }
       ]
 }

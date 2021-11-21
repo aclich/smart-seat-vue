@@ -24,6 +24,7 @@ export default {
     },
     methods:{
         Loading(){
+            this.username = 'loding1'
             this.isLoading = true
             setTimeout(() => {
                 this.isLoading = false

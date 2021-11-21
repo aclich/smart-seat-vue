@@ -30,6 +30,7 @@ import ResetPassword from '../pages/authentication/reset_password'
 
 // component
 import Home from '../pages/home'
+import Sample2 from '../pages/sample_2'
 
 Vue.use(Router)
 
@@ -40,7 +41,7 @@ const routes = [
   component: Body,
   children:[
     {
-      path:'',
+      path:'default',
       name: 'default',
       component: Home,
       meta:{
@@ -48,6 +49,20 @@ const routes = [
       }
     }
 
+  ]
+},
+{
+  path: '/sample',
+  component: Body,
+  children: [
+    {
+      path: '2',
+      name: 'sample2',
+      component: Sample2,
+      meta:{
+        title: 'Sample_2 | Smart Seats'
+      }
+    }
   ]
 },
 {

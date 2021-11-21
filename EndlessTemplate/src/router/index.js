@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from "vue-router";
-import firebase from 'firebase';
-import Userauth from '../auth/js/index'
+// import firebase from 'firebase';
+// import Userauth from '../auth/js/index'
 
 import Body from '../components/body'
 import Auth from '../auth/auth'
@@ -1551,17 +1551,17 @@ const router = new Router({
   }
 });
 
-router.beforeEach((to, from, next) => {
-  firebase.auth().onAuthStateChanged(() => {
-    if(to.meta.title)
-      document.title = to.meta.title;
-    const CurrentUser = firebase.auth().currentUser;    
-    const  path = ['/auth/login','/auth/register'];
-    if (path.includes(to.path) || to.path === "/callback" || CurrentUser || Userauth.isAuthenticatedUser()){
-      return next();
-    }
-    next('/auth/login')
-  });
-});
+// router.beforeEach((to, from, next) => {
+//   firebase.auth().onAuthStateChanged(() => {
+//     if(to.meta.title)
+//       document.title = to.meta.title;
+//     const CurrentUser = firebase.auth().currentUser;    
+//     const  path = ['/auth/login','/auth/register'];
+//     if (path.includes(to.path) || to.path === "/callback" || CurrentUser || Userauth.isAuthenticatedUser()){
+//       return next();
+//     }
+//     next('/auth/login')
+//   });
+// });
 
 export default router

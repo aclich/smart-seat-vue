@@ -17,7 +17,7 @@
             </router-link>
           </div>
         </div>
-        <h6 class="mt-3 f-14">ELANA</h6>
+        <h6 class="mt-3 f-14">C8763</h6>
         <p>general manager.</p>
       </div>
       <ul
