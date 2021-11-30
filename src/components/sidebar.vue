@@ -17,8 +17,8 @@
             </router-link>
           </div>
         </div>
-        <h6 class="mt-3 f-14">C8763</h6>
-        <p>general manager.</p>
+        <h6 class="mt-3 f-14">{{ user_info.username }}</h6>
+        <p>{{ user_info.userrole }}</p>
       </div>
       <ul
         class="sidebar-menu"
@@ -41,7 +41,7 @@
           <a
             href="javascript:void(0)"
             class="sidebar-header"
-            v-if="menuItem.type == 'sub'"
+            v-if="menuItem.type == 'sub' && menuItem.permission == user_info.permission"
             @click="setNavActive(menuItem, index)"
           >
             <feather :type="menuItem.icon" class="top"></feather>
@@ -231,7 +231,12 @@ export default {
       hideLeftArrowRTL: true,
       hideRightArrow: true,
       hideLeftArrow: true,
-      menuWidth: 0
+      menuWidth: 0,
+      user_info:{
+        username: 'c8763',
+        userrole: 'black archer',
+        permission: 0
+      }
     };
   },
   computed: {
@@ -266,11 +271,14 @@ export default {
         this.menuWidth = elmnt.offsetWidth;   
         this.menuWidth > window.innerWidth  ? (this.hideRightArrow = false,this.hideLeftArrowRTL = false) : (this.hideRightArrow = true,this.hideLeftArrowRTL = true)
       }, 500)
+    this.getuserinfo()
   },
   destroyed() {
     window.removeEventListener("resize", this.handleResize);
   },
-  mounted() {   
+  mounted() {
+    console.log(this.user_info)
+    console.log(this.menuItems)   
     this.menuItems.filter(items => {
       if (items.path === this.$route.path)
         this.$store.dispatch("menu/setActiveRoute", items);
@@ -287,6 +295,9 @@ export default {
     });
   },
   methods: {
+    getuserinfo(){
+      this.user_info = this.$store.state.user_info
+    },
     setNavActive(item) {
       this.$store.dispatch("menu/setNavActive", item);
     },

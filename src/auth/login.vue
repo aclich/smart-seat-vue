@@ -4,12 +4,12 @@
         <div class="container-fluid p-0">
             <!-- login page start-->
             <div class="authentication-main">
-                <!-- <loading
+                <loading
                     loader="dots"
                     :active.sync="isLoading"
                     :can-cancel="false"
                     :is-full-page="true"
-                ></loading> -->
+                ></loading>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="auth-innerright">
@@ -19,11 +19,11 @@
                                     <div class="card-body">
                                         <div class="text-center">
                                             <h4>LOGIN</h4>
-                                            <h6>Enter your Username and Password </h6>
+                                            <h6>Enter your email and Password </h6>
                                         </div>
                                         <form class="theme-form">
                                             <div class="form-group">
-                                                <label class="col-form-label pt-0">Your Name</label>
+                                                <label class="col-form-label pt-0">Your email</label>
                                                 <input v-model="form.email" class="form-control" required="" type="email">
                                             </div>
                                             <div class="form-group">
@@ -60,7 +60,7 @@
 <script>
 // import firebase from 'firebase';
 
-import Userauth from '../auth/js/index'
+// import Userauth from '../auth/js/index'
 import {api_server} from "@/main"
 export default {
     name: 'login',
@@ -79,21 +79,35 @@ export default {
                     this.email = "test@admin.com",
                     this.password = "test@123456"
             } else {
+                this.isLoading = true;
                 console.log(this.form.email, this.form.password)
-                // this.isLoading = true
                 api_server.post("/auth/login",JSON.stringify(this.form))
                 .then(response => {
                 console.log(response)
-                 if (response.data == 'success'){
-                     console.log('success')
+                console.log(response.data)
+                console.log(response.status)
+                 if (response.status == 200){
+                     console.log(response)
+                     this.$toasted.show('login success!',{
+                         theme: 'bubble',
+                         position: "top-right",
+                         type: 'success',
+                         duration: 2000
+                     })
+                    //  this.$store.commit('setusername', response.data.username)
+                    //  this.$store.commit('setpermission', response.data.permission)
+                    this.$store.commit('setUser_info', response.data)
+                    this.isLoading = false
+                    this.$router.push('/')
                      }
                 }).catch( err=>{
-                    console.log(err)
+                    console.log(err.response.data.message)
                     this.$swal({
                         title: "登入失敗",
                         type: "error",
                         text: "帳號或密碼錯誤!"
                     })
+                    this.isLoading = false
                 })
             }
                 // firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
@@ -110,7 +124,13 @@ export default {
         },
 
         signUp () {
-            Userauth.login()
+            // Userauth.login()
+            this.isLoading = true;
+            this.$router.push('/auth/register')
+            this.isLoading = false;
+            // setTimeout(() => {
+            //     this.isLoading = false
+            // }, 2000);
         }
     }
 }

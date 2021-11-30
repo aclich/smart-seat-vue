@@ -6,7 +6,7 @@
       <div class="page-main-header" :class="{ open:toggle_sidebar_var }">
         <div class="main-header-right row">
           <div class="main-header-left d-lg-none">
-            <div class="logo-wrapper"><router-link :to="{ name: 'default'}" ><img src="../assets/images/endless-logo.png" alt=""></router-link></div>
+            <div class="logo-wrapper"><router-link :to="{ name: 'default'}" ><img width=200 src="../assets/images/1280px-Sword_Art_Online_anime_logo.svg.png" alt=""></router-link></div>
           </div>
           <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">
@@ -16,7 +16,7 @@
           <div class="nav-right col">
             <ul class="nav-menus" :class="{ open: mobile_toggle }">
               <li>
-                <form class="form-inline search-form">
+                <!-- <form class="form-inline search-form">
                   <div class="form-group">
                     <input :class="{ open: mobile_search }" class="form-control-plaintext"  v-on:keyup="searchTerm" v-model="terms" type="text" placeholder="Search..">
                     <div :class="searchResult ? 'Typeahead-menu is-open' : 'Typeahead-menu'" v-if="menuItems.length">
@@ -42,10 +42,10 @@
                   <feather type="search"></feather>
                 </span>
               </div>
-            </form>
+            </form> -->
           </li>
           <li><a href="javascript:void(0)" class="text-dark" v-on:click="toggle_fullscreen()"><feather type="maximize"></feather></a></li>
-          <li class="onhover-dropdown"><a class="txt-dark" href="#">
+          <!-- <li class="onhover-dropdown"><a class="txt-dark" href="#">
             <h6>EN</h6></a>
             <ul class="language-dropdown onhover-show-div p-20">
               <li><a href="#" data-lng="en"><i class="flag-icon flag-icon-is"></i> English</a></li>
@@ -53,8 +53,8 @@
               <li><a href="#" data-lng="pt"><i class="flag-icon flag-icon-uy"></i> Portuguese</a></li>
               <li><a href="#" data-lng="fr"><i class="flag-icon flag-icon-nz"></i> French</a></li>
             </ul>
-          </li>
-          <li class="onhover-dropdown"><feather type="bell"></feather><span class="dot"></span>
+          </li> -->
+          <!-- <li class="onhover-dropdown"><feather type="bell"></feather><span class="dot"></span>
             <ul class="notification-dropdown onhover-show-div">
               <li>Notification <span class="badge badge-pill badge-primary pull-right">3</span></li>
               <li>
@@ -83,18 +83,18 @@
               </li>
               <li class="bg-light txt-dark"><a href="#">All</a> notification</li>
             </ul>
-          </li>
-          <li><a href="#" v-on:click="toggle_rightsidebar"><feather type="message-circle"></feather><span class="dot"></span></a></li>
+          </li> -->
+          <!-- <li><a href="#" v-on:click="toggle_rightsidebar"><feather type="message-circle"></feather><span class="dot"></span></a></li> -->
           <li class="onhover-dropdown">
             <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" :src="getImgUrl()" alt="header-user">
               <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
             </div>
             <ul class="profile-dropdown onhover-show-div p-20">
-              <li><a href="#"><feather type="user"></feather> Edit Profile</a></li>
+              <!-- <li><a href="#"><feather type="user"></feather> Edit Profile</a></li>
               <li><a href="#"><feather type="mail"></feather> Inbox</a></li>
               <li><a href="#"><feather type="lock"></feather> Lock Screen</a></li>
-              <li><a href="#"><feather type="settings"></feather> Settings</a></li>
-              <li @click="logout" ><a href="#"><feather type="log-out"></feather> Logout</a></li>
+              <li><a href="#"><feather type="settings"></feather> Settings</a></li> -->
+              <li @click="logout" ><span><feather type="log-out"></feather> Logout</span></li>
             </ul>
           </li>
         </ul>
@@ -109,6 +109,9 @@
 <script>
 var body = document.getElementsByTagName("body")[0];
 import { mapState } from "vuex";
+import { api_server } from '@/main'
+// import Cookies from 'js-cookies'
+import Swal from 'sweetalert2'
 // import firebase from 'firebase';
 // import UserAuth from '../auth/js/index'
 export default {
@@ -123,7 +126,7 @@ export default {
       toggle_rightsidebar_var:false,
       rightclicked:false,
       mobile_toggle:false,
-      mobile_search: false
+      mobile_search: false,
     }
   },
   computed: {
@@ -140,12 +143,38 @@ export default {
     searchTerm: function() {
       this.$store.dispatch('menu/searchTerm', this.terms)
     },
-    logout: function() {
+    logout(){
+            console.log('logout')
+            var canLogout = false
+            api_server.post('/auth/logout').then(response =>{
+                console.log(response.status)
+                if (response.status == 200){
+                    canLogout = true
+                    console.log('canlogout=',canLogout)
+                // if (canLogout){
+                    this.$toasted.show('logout success!',{
+                         theme: 'bubble',
+                         position: "top-right",
+                         type: 'info',
+                         duration: 2000
+                     })
+                    // this.$cookies.remove('access_token')
+                    // this.$cookies.remove('refresh_token')
+                    this.$router.push('/auth/login')
+                    // }
+                }
+            }).catch(err =>{
+                Swal.fire({
+                    title: 'error!',
+                    text: err,
+                    type: 'error'
+                })
+            })
       // firebase.auth().signOut().then(() => {
       //   UserAuth.Logout();
       //   this.$router.replace('/auth/login')
       // })
-    },
+        },
     addFix() {
       body.classList.add("offcanvas")
       this.searchResult = true;

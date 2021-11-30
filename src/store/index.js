@@ -14,6 +14,27 @@ export const store = new Vuex.Store({
         layout,
         menu,
     },
+    state:{
+        user_info: {
+            username: 'no_name',
+            permission: 0,
+            userrole: 'no_role'
+        }
+    },
+    mutations:{
+        // setusername(state, val){
+        //     console.log('changeing username to', val)
+        //     state.user_info.username = val;
+        // },
+        // setpermission(state, val){
+        //     console.log('changeing permission to', val)
+        //     state.user_info.permission = val;
+        // }
+        setUser_info(state, val){
+            console.log('set user_info to', val)
+            state.user_info = val
+        }
+    },
     strict: false
 });
 

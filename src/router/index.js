@@ -28,9 +28,16 @@ import Unlock from '../pages/authentication/unlock'
 import ForgetPassword from '../pages/authentication/forget_password'
 import ResetPassword from '../pages/authentication/reset_password'
 
+/* User Profile */
+import UserProfile from '../pages/users/profile'
+import UserEditProfile from '../pages/users/edit-profile'
+import UserCards from '../pages/users/cards'
+
 // component
 import Home from '../pages/home'
 import Sample2 from '../pages/sample_2'
+import Cookies from 'js-cookies'
+import Swal from 'sweetalert2'
 
 Vue.use(Router)
 
@@ -199,6 +206,36 @@ const routes = [
       title: 'ResetPassword | Smart Seats',
     }
 },
+{
+  path:'/users',
+  component: Body,
+  children:[
+    {
+      path: 'profile',
+      name: 'UserProfile',
+      component:UserProfile,
+       meta: {
+        title: 'serProfile | Endless - Premium Admin Template',
+      }
+    },
+    {
+      path: 'edit',
+      name: 'UserEditProfile',
+      component:UserEditProfile,
+       meta: {
+        title: 'serEditProfile | Endless - Premium Admin Template',
+      }
+    },
+    {
+      path: 'cards',
+      name: 'UserCards',
+      component:UserCards,
+       meta: {
+        title: 'serCards | Endless - Premium Admin Template',
+      }
+    }
+  ]
+},
 
 ];
 
@@ -215,19 +252,36 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log("from", from.fullPath)
   console.log("to", to.fullPath)
-  if (to.fullPath == '/auth/register'){
+  let isLogin = Cookies.getItem('refresh_token') !=  null
+  const path = ['/auth/login','/auth/register'];
+  console.log(Cookies.getItem('refresh_token'), isLogin)
+  if (path.includes(to.path) && isLogin){
+    Swal.fire({
+      title: 'Route error',
+      text: 'Already login!',
+      type: 'error'
+    })
+    return next('/home/default')
+  }
+  else if (path.includes(to.path) && !isLogin){
     return next();
   }
-  if (to.fullPath == '/auth/login'){
-    return next();
+  else if (!isLogin){
+    Swal.fire({
+      title: 'Not logged in!',
+      text: 'Please Login first!',
+      type: 'error'
+    })
+    return next('/auth/login');
+  }else{
+    return next()
   }
   // next('/auth/login')
-  return next();
-//   firebase.auth().onAuthStateChanged(() => {
-//     if(to.meta.title)
-//       document.title = to.meta.title;
-//     const CurrentUser = firebase.auth().currentUser;    
-//     const  path = ['/auth/login','/auth/register'];
+  //   firebase.auth().onAuthStateChanged(() => {
+    //     if(to.meta.title)
+    //       document.title = to.meta.title;
+    //     const CurrentUser = firebase.auth().currentUser;    
+    // const  path = ['/auth/login','/auth/register'];
 //     if (path.includes(to.path) || to.path === "/callback" || CurrentUser || Userauth.isAuthenticatedUser()){
 //       return next();
 //     }
