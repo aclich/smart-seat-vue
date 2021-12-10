@@ -2,13 +2,32 @@
   "data": [ 
         {
           "title": "Users", "icon": "users", "type": "sub", "permission":0, "active": false, "children": [
-            { "path": "/users/profile", "title": "Users Profile", "type": "link" },          
-            { "path": "/users/edit", "title": "Users Edit", "type": "link" },
-            { "path": "/users/cards", "title": "Users Cards", "type": "link" }
+            { "path": "/users/edit", "title": "Users Edit", "type": "link" }
           ]
         },
         {
-          "title": "Authentication", "icon": "unlock", "type": "sub", "permission":1, "active": false, "children": [
+          "title": "Sensor Seats", "icon": "cpu", "type": "sub", "permission":0, "active": false, "children": [
+            { "path": "/sensor/register", "title": "Register sensor", "type": "link" },
+            { "path": "/sensor/records", "title": "Check Records", "type": "link" }
+          ]
+        },
+        {
+          "title": "Administration", "icon": "unlock", "type": "sub", "permission":1, "active": false, "children": [
+            { "path": "/admin/user_management", "title": "User Management", "type": "link" }
+          ]
+        },
+        {
+          "title": "Test Sample", "icon": "coffee", "type": "sub", "permission":0, "active": false, "children": [
+            {"path": "/sample/2", "title": "Sample_2", "type":"link" }  
+          ]
+        },
+        {
+          "title": "Super function","badgeType": "danger", "badgeValue": "danger", "icon": "alert-triangle", "type": "sub", "permission":2, "active": false, "children": [
+            {"path": "/superuser/sql_injection", "title": "SQL Injection", "type":"link" }  
+          ]
+        },
+        {
+          "title": "Authentication", "icon": "unlock", "type": "sub", "permission":4, "active": false, "children": [
             { "path": "/auth/login", "title": "Login Simple", "type": "extTabLink" },          
             { "path": "/authentication/login/image", "title": "Login with Bg Image", "type": "extTabLink" },
             { "path": "/authentication/login/video", "title": "Login with Bg video", "type": "extTabLink" },
@@ -18,11 +37,6 @@
             { "path": "/authentication/unlockuser", "title": "Unlock User", "type": "extTabLink" },
             { "path": "/authentication/forgetpassword", "title": "Forget Password", "type": "extTabLink" },
             { "path": "/authentication/resetpassword", "title": "Reset Password", "type": "extTabLink" }
-          ]
-        },
-        {
-          "title": "Test_Sample", "icon": "unlock", "type": "sub", "permission":2, "active": false, "children": [
-            {"path": "/sample/2", "title": "Sample_2", "type":"link" }  
           ]
         }
       ]

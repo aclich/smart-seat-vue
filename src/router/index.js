@@ -30,8 +30,14 @@ import ResetPassword from '../pages/authentication/reset_password'
 
 /* User Profile */
 import UserProfile from '../pages/users/profile'
-import UserEditProfile from '../pages/users/edit-profile'
+// import UserEditProfile from '../pages/users/edit-profile'
 import UserCards from '../pages/users/cards'
+
+/* Super user */
+import SqlInjection from '../pages/superuser/sql_injection'
+
+/* Sensor */
+import RegisterSensor from '../pages/sensors/register_sensor'
 
 // component
 import Home from '../pages/home'
@@ -43,6 +49,7 @@ Vue.use(Router)
 
 const routes = [
 { path: '', redirect: { name: 'default' }},
+{ path: '*', component: Error404},
 {
   path: '/home',
   component: Body,
@@ -221,7 +228,8 @@ const routes = [
     {
       path: 'edit',
       name: 'UserEditProfile',
-      component:UserEditProfile,
+      // component:UserEditProfile,
+      component: Error404,
        meta: {
         title: 'serEditProfile | Endless - Premium Admin Template',
       }
@@ -232,6 +240,42 @@ const routes = [
       component:UserCards,
        meta: {
         title: 'serCards | Endless - Premium Admin Template',
+      }
+    }
+  ]
+},
+{
+  path:'/superuser',
+  component: Body,
+  children:[
+    {
+      path: 'sql_injection',
+      name: 'UserProfile',
+      component: SqlInjection,
+       meta: {
+        title: 'sql_injection',
+      }
+    },
+  ]
+},
+{
+  path:'/sensor',
+  component: Body,
+  children:[
+    {
+      path: 'register',
+      name: 'RegisterSensor',
+      component: RegisterSensor,
+       meta: {
+        title: 'Register Sensor',
+      }
+    },
+    {
+      path: 'records',
+      name: 'CheckSensorRecord',
+      component: Error404,
+      meta:{
+        title: 'Check Sensor Records'
       }
     }
   ]
@@ -276,17 +320,6 @@ router.beforeEach((to, from, next) => {
   }else{
     return next()
   }
-  // next('/auth/login')
-  //   firebase.auth().onAuthStateChanged(() => {
-    //     if(to.meta.title)
-    //       document.title = to.meta.title;
-    //     const CurrentUser = firebase.auth().currentUser;    
-    // const  path = ['/auth/login','/auth/register'];
-//     if (path.includes(to.path) || to.path === "/callback" || CurrentUser || Userauth.isAuthenticatedUser()){
-//       return next();
-//     }
-//     next('/auth/login')
-//   });
 });
 
 export default router

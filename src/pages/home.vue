@@ -1,4 +1,6 @@
 <template>
+<div>
+    <Breadcrumbs title="Home" />
 <!-- Container-fluid starts-->
     <div class="container-fluid">
         <loading
@@ -7,29 +9,31 @@
             :can-cancel="false"
             :is-full-page="true"
         ></loading>
-        <div class="card">
-        <label> hello {{ this.username }} ! </label>
-        <b-button type="button" v-on:click="Loading" variant="primary">Loading</b-button>
+        <!-- <h1>Smart Sensor Seats</h1> -->
+        <div class='row'>
+            <div class='col-xl-8 xl-100'>
+                <div class="card">
+                    <div class="card-header typography">
+                        <p class="h5 txt-primary">Welcome to Smart Seats Management System,<small>{{ userinfo.username }} !</small></p>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
+</div>
 </template>
 
 <script>
 export default {    
     data(){
         return{
-            username: 'test',
+            userinfo: JSON.parse(window.sessionStorage.getItem('userInfo')),
             isLoading: false
         }
     },
     methods:{
-        Loading(){
-            this.username = 'loding1'
-            this.isLoading = true
-            setTimeout(() => {
-                this.isLoading = false
-            }, 2000);
-        }
+
     }
 }
 </script>

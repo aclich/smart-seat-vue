@@ -41,7 +41,7 @@
           <a
             href="javascript:void(0)"
             class="sidebar-header"
-            v-if="menuItem.type == 'sub' && menuItem.permission == user_info.permission"
+            v-if="menuItem.type == 'sub' && menuItem.permission <= user_info.permission"
             @click="setNavActive(menuItem, index)"
           >
             <feather :type="menuItem.icon" class="top"></feather>
@@ -271,6 +271,12 @@ export default {
         this.menuWidth = elmnt.offsetWidth;   
         this.menuWidth > window.innerWidth  ? (this.hideRightArrow = false,this.hideLeftArrowRTL = false) : (this.hideRightArrow = true,this.hideLeftArrowRTL = true)
       }, 500)
+  //在頁面載入時讀取sessionStorage裡的狀態資訊
+  // this.$store.state.userInfo = window.sessionStorage.getItem("userInfo")
+  //在頁面重新整理時將vuex裡的資訊儲存到sessionStorage裡
+  // window.addEventListener("beforeunload",() => {
+  //   window.sessionStorage.setItem("userInfo",this.$store.state.userInfo)
+  // })
     this.getuserinfo()
   },
   destroyed() {
@@ -296,7 +302,8 @@ export default {
   },
   methods: {
     getuserinfo(){
-      this.user_info = this.$store.state.user_info
+      // this.user_info = this.$store.state.user_info
+      this.user_info = JSON.parse(window.sessionStorage.getItem("userInfo"))
     },
     setNavActive(item) {
       this.$store.dispatch("menu/setNavActive", item);

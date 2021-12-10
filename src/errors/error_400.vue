@@ -11,7 +11,7 @@
 					<div class="col-md-8 offset-md-2">
 						<p class="sub-content">The page you are attempting to reach is currently not available. This may be because the page does not exist or has been moved.</p>
 					</div>
-					<div><router-link class="btn btn-info-gradien btn-lg" :to="{ path: '/dashboard/default' }">BACK TO HOME PAGE</router-link></div>
+					<div><router-link class="btn btn-info-gradien btn-lg" :to="{ path: '/' }">BACK TO HOME PAGE</router-link></div>
 				</div>
 			</div>
 			<!-- error-400 end-->

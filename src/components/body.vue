@@ -6,7 +6,7 @@
         <div class="page-sidebar" :class="[{ open : sidebar_toggle_var }, layout.settings.sidebar_backround]" :sidebar-layout="layout.settings.sidebar_setting">
           <Sidebar />
         </div>
-        <RightSidebar :rightsidebar_toggle_var = rightsidebar_toggle_var />
+        <!-- <RightSidebar :rightsidebar_toggle_var = rightsidebar_toggle_var /> -->
         <div class="page-body">
           <transition name="fadeIn" enter-active-class="animated fadeIn">
            <router-view class="view"></router-view>
@@ -14,7 +14,7 @@
         </div>
         <Footer/>
       </div>
-      <Customizer/>
+      <!-- <Customizer/> -->
     </div>
   </div>
 </template>
@@ -23,9 +23,9 @@
 import { mapState } from "vuex";
 import Header from './header'
 import Sidebar from './sidebar'
-import RightSidebar from './right_sidebar'
+// import RightSidebar from './right_sidebar'
 import Footer from './footer'
-import Customizer from './customizer'
+// import Customizer from './customizer'
 
 export default {
   name: 'mainpage',
@@ -42,9 +42,9 @@ export default {
   components:{
     Header,
     Sidebar,
-    RightSidebar,
+    // RightSidebar,
     Footer,
-    Customizer
+    // Customizer
   },
   computed: {
     ...mapState({

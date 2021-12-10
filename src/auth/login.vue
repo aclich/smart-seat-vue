@@ -84,7 +84,8 @@ export default {
                 api_server.post("/auth/login",JSON.stringify(this.form))
                 .then(response => {
                 console.log(response)
-                console.log(response.data)
+                var user_info = JSON.stringify(response.data)
+                console.log(user_info)
                 console.log(response.status)
                  if (response.status == 200){
                      console.log(response)
@@ -97,30 +98,20 @@ export default {
                     //  this.$store.commit('setusername', response.data.username)
                     //  this.$store.commit('setpermission', response.data.permission)
                     this.$store.commit('setUser_info', response.data)
+                    window.sessionStorage.setItem("userInfo", user_info)
                     this.isLoading = false
                     this.$router.push('/')
                      }
                 }).catch( err=>{
-                    console.log(err.response.data.message)
+                    console.log(err)
                     this.$swal({
                         title: "登入失敗",
                         type: "error",
-                        text: "帳號或密碼錯誤!"
+                        text: err.response.data.message
                     })
                     this.isLoading = false
                 })
             }
-                // firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                //     (result) => {
-                //         Userauth.localLogin(result)
-                //         this.$router.replace('/')
-                    // },
-                    // (err) => {
-                    //     this.email = "test@admin.com",
-                    //     this.password = "test@123456"
-                    //     this.$toasted.show('Oops...' + err.message, {theme: 'bubble',   position: "bottom-right",   type: 'error', duration: 2000});
-                    // }
-                // );
         },
 
         signUp () {

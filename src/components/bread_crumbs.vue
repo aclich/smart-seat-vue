@@ -12,15 +12,15 @@
             </ol>
           </div>
         </div>
-        <div class="col-lg-6">
-          <Bookmark />
-        </div>
+        <!-- <div class="col-lg-6"> -->
+          <!-- <Bookmark /> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-import Bookmark from  './bookmark'
+// import Bookmark from  './bookmark'
 export default {
   props: {
     title: {
@@ -31,7 +31,7 @@ export default {
     }
   },
   components:{
-    Bookmark
+    // Bookmark
   }
 }
 </script>
