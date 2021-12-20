@@ -14,7 +14,7 @@
             <div class='col-xl-8 xl-100'>
                 <div class="card">
                     <div class="card-header typography">
-                        <p class="h5 txt-primary">Welcome to Smart Seats Management System,<small>{{ userinfo.username }} !</small></p>
+                        <p class="h5 txt-primary">歡迎來到壓力坐墊紀錄系統, <small>{{ userinfo.username }} !</small></p>
                     </div>
                 </div>
             </div>

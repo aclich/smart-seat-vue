@@ -65,11 +65,11 @@
                     console.log(response)
                     this.sql_data = response.data.message
                 }).catch(err =>{
-                    console.log(err)
+                    console.log(err.response)
                     this.$swal({
                         title: "Command Running Failed!",
                         type: "error",
-                        text: err.data.message
+                        text: err.response.data.message
                     })
                 })
             }

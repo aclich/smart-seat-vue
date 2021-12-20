@@ -60,7 +60,7 @@
 
                           <!-- Simple Modal Component -->
                           <b-modal id="modal-1" title="Modal Title" ok-title="Save Changes" class="theme-modal">
-                            <p>....</p>
+                            <p>{{  }}</p>
                           </b-modal>
 
                           <!-- Scrolling long Modal Component -->

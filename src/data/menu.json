@@ -7,8 +7,8 @@
         },
         {
           "title": "Sensor Seats", "icon": "cpu", "type": "sub", "permission":0, "active": false, "children": [
-            { "path": "/sensor/register", "title": "Register sensor", "type": "link" },
-            { "path": "/sensor/records", "title": "Check Records", "type": "link" }
+            { "path": "/sensor/register", "title": "Seats Management", "type": "link" },
+            { "path": "/sensor/records", "title": "Records", "type": "link" }
           ]
         },
         {

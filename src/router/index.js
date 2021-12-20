@@ -250,7 +250,7 @@ const routes = [
   children:[
     {
       path: 'sql_injection',
-      name: 'UserProfile',
+      name: 'SQLInjection',
       component: SqlInjection,
        meta: {
         title: 'sql_injection',
