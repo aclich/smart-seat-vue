@@ -48,13 +48,11 @@ export default {
                 selected: '',
             },
             seat_type_select_options: [
-              { value: '', text:'請選擇型號...'},
-              { value: 'A-0001', text:'A-0001型' },
-              { value: 'C-8763', text:'C-8763型' }
             ],
         }
     },
     created(){
+        this.get_type_list()
     },
     methods:{
         showmodal(){
@@ -80,7 +78,7 @@ export default {
         },
         get_type_list(){
             api_server.get('/seat/get-type-list').then(res => {
-                this.seat_type_select_options = res.data.data
+                this.seat_type_select_options = res.data.data.type_list 
             }).catch(err => {
                 console.log(err)
                 this.$swal({

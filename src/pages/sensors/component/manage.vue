@@ -35,12 +35,12 @@
                 <tbody slot="body" slot-scope="{displayData}" align='center'>
                     <tr v-for="row in displayData" :key="row.id">
                         <td>{{ row.seat_name }}</td>
-                        <td>{{ row.seat_type }}</td>
+                        <td>{{ type_map[row.seat_type] }}</td>
                         <td>{{ row.created }}</td>
                         <td>{{ row.note }}</td>
                         <td>
                             <!-- <label>{{ row.id }}</label> -->
-                            <b-button class="btn btn-light btn-xs m-1" @click="generate_data(row)"><i class="fa fa-plus-square"></i></b-button>
+                            <b-button class="btn btn-light btn-xs m-1" @click="swal_generate_data(row)"><i class="fa fa-plus-square"></i></b-button>
                             <b-button class="btn btn-info btn-xs m-1" @click="call_editmodal(row)"><i class="fa fa-pencil"></i></b-button>
                             <b-button class="btn btn-danger btn-xs m-1" @click="delete_seat(row)" ><i class="icofont icofont-trash"></i></b-button>
                         </td>
@@ -85,11 +85,13 @@ export default {
                 created: "",
                 note:""
             },
+            type_map:{}
         }
     },
     created(){
         // console.log('created manage')
         this.get_user_seat_list()
+        this.get_type_map()
     },
     components:{
         EditModal
@@ -102,7 +104,6 @@ export default {
         },
         get_seat_data: function () {
             console.log("computed get seat")
-            // this.get_user_seat_list()
             return this.$store.state.seat_list
         }
     },
@@ -112,6 +113,19 @@ export default {
         }
     },
     methods:{
+        get_type_map(){
+            api_server.get('/seat/get-type-list')
+            .then(res =>{
+                this.type_map = res.data.data.type_map
+            }).catch(err => {
+                console.log(err.response)
+                this.$swal({
+                    title:'錯誤',
+                    type:'error',
+                    text:err.response.data.message
+                })
+            })
+        },
         get_user_seat_list(){
             // var tmp_data = [
             //     {
@@ -150,12 +164,6 @@ export default {
         copy_row(row_data){
             this.modal_data = clone(row_data)
         },
-        modify_row(modal_data){
-            console.log(modal_data)
-        },
-        generate_data(row_data){
-            console.log(row_data)
-        },
         delete_seat(row_data){
             this.$swal({
                 type:'warning',
@@ -183,16 +191,44 @@ export default {
                         this.$store.commit('change_loading_state', false)
                         }
                     }).catch(err => {
-                        var err_msg = (err.respones.data.err_msg == '') ? err.response.data.message : err.response.data.err_msg
+                        console.log(err.response)
+                        var err_msg = (err.response.data.err_msg == '') ? err.response.data.message : err.response.data.err_msg
                         this.$swal({
                             title:"刪除失敗!",
                             type:'error',
                             text: err_msg
                         })
-                        this.$store.commit('change_loading_status', false)
+                        this.$store.commit('change_loading_state', false)
                     })
                 }
             })
+        },
+        swal_generate_data(row_data){
+            console.log(row_data)
+            this.$swal({
+                type:'info',
+                title:"產生資料",
+                text:'(Demo Function)要為此坐墊生成量測資料嗎?',
+				showCancelButton: true,
+				confirmButtonText: '確定',
+				confirmButtonColor: '#4466f2',
+				cancelButtonText: '取消',
+				cancelButtonColor: '#efefef',
+				reverseButtons: true
+			}).then(result => {
+                if(result.value){
+                    this.generate_data(row_data)
+                }
+            })
+        },
+        generate_data(row_data){
+            this.$swal({
+                title:'哭阿',
+                type:'error',
+                text:'還沒做好拉🙃🥺🥺🥺'
+            })
+            console.log(row_data)
+            // api_server.post('generate_data')
         }
     },
 

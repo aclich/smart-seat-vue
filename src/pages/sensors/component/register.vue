@@ -131,7 +131,7 @@ export default {
         },
         get_type_list(){
             api_server.get('/seat/get-type-list').then(res => {
-                this.seat_type_select_options = res.data.data
+                this.seat_type_select_options = res.data.data.type_list
             }).catch(err => {
                 console.log(err)
                 this.$swal({
