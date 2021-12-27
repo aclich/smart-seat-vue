@@ -160,7 +160,6 @@ export default {
                      })
                     // this.$cookies.remove('access_token')
                     // this.$cookies.remove('refresh_token')
-                    this.$router.push('/auth/login')
                     // }
                 }
             }).catch(err =>{
@@ -169,6 +168,8 @@ export default {
                     text: err,
                     type: 'error'
                 })
+            }).finally(() =>{
+                this.$router.push('/auth/login')
             })
       // firebase.auth().signOut().then(() => {
       //   UserAuth.Logout();

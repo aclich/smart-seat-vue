@@ -37,7 +37,10 @@ import UserCards from '../pages/users/cards'
 import SqlInjection from '../pages/superuser/sql_injection'
 
 /* Sensor */
-import RegisterSensor from '../pages/sensors/register_sensor'
+import RegisterSensor from '../pages/sensors/manage/register_sensor'
+import CheckSeatRecord from '../pages/sensors/records/check_records'
+import SeatRecordList from '../pages/sensors/records/component/record_list'
+import ShowRecordData from '../pages/sensors/records/show_data'
 
 // component
 import Home from '../pages/home'
@@ -245,6 +248,17 @@ const routes = [
   ]
 },
 {
+  path: "/admin",
+  component: Body,
+  children:[
+    {
+      path: 'user_management',
+      name: 'UserManagement',
+      component: Error404
+    }
+  ]
+},
+{
   path:'/superuser',
   component: Body,
   children:[
@@ -273,10 +287,22 @@ const routes = [
     {
       path: 'records',
       name: 'CheckSensorRecord',
-      component: Error404,
+      component: CheckSeatRecord,
+      children:[
+        {
+          path: ':id',
+          name: 'SeatList',
+          component: SeatRecordList
+        }
+      ],
       meta:{
         title: 'Check Sensor Records'
       }
+    },
+    {
+      path: 'records/show/:data_type/:id/:date',
+      name: 'ShowRecordData',
+      component: ShowRecordData,
     }
   ]
 },

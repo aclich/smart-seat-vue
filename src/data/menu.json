@@ -17,7 +17,7 @@
           ]
         },
         {
-          "title": "Test Sample", "icon": "coffee", "type": "sub", "permission":0, "active": false, "children": [
+          "title": "Test Sample", "icon": "coffee", "type": "sub", "permission":99, "active": false, "children": [
             {"path": "/sample/2", "title": "Sample_2", "type":"link" }  
           ]
         },

@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="c_form_seat_type">坐墊型號</label>
-                        <b-form-select v-model="c_form.seat_type" :options="seat_type_select_options" :state="c_form_result.seat_type"></b-form-select>
+                        <b-form-select id="c_form_seat_type" v-model="c_form.seat_type" :options="seat_type_select_options" :state="c_form_result.seat_type"></b-form-select>
                         <b-form-invalid-feedback :state="c_form_result.seat_type">請選擇對應的型號</b-form-invalid-feedback>
                     </div>
                 </div>

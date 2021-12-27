@@ -41,6 +41,7 @@
                         <td>
                             <!-- <label>{{ row.id }}</label> -->
                             <b-button class="btn btn-light btn-xs m-1" @click="swal_generate_data(row)"><i class="fa fa-plus-square"></i></b-button>
+                            <b-button class="btn btn-warning btn-xs m-1" @click="check_record(row)"><i class="fa fa-eye"></i></b-button>
                             <b-button class="btn btn-info btn-xs m-1" @click="call_editmodal(row)"><i class="fa fa-pencil"></i></b-button>
                             <b-button class="btn btn-danger btn-xs m-1" @click="delete_seat(row)" ><i class="icofont icofont-trash"></i></b-button>
                         </td>
@@ -72,7 +73,6 @@ export default {
 				currentPage: 1,
 				totalPages: 0,
 			},
-
             filters:{
                 seat_name: { value: '', keys: ['seat_name'] },
                 seat_type: { value: '', keys: ['seat_type'] },
@@ -217,18 +217,53 @@ export default {
 				reverseButtons: true
 			}).then(result => {
                 if(result.value){
+                    this.$store.commit('change_loading_state', true)
                     this.generate_data(row_data)
                 }
             })
         },
         generate_data(row_data){
-            this.$swal({
-                title:'哭阿',
-                type:'error',
-                text:'還沒做好拉🙃🥺🥺🥺'
-            })
             console.log(row_data)
-            // api_server.post('generate_data')
+            api_server.post('/seat/data/auto-gen', {data: row_data})
+            .then(res =>{
+                this.$swal({
+                    title:'產生成功',
+                    type:'success',
+                    text:res.data.data
+                })
+            }).catch(err =>{
+                this.$swal({
+                    title:'產生失敗',
+                    type:'error',
+                    text: err.response.data.message
+                })
+            }).finally(() => {
+                this.$store.commit('change_loading_state', false)
+            })
+        },
+        check_record(row_data){
+            this.$swal({
+                type:'info',
+                title:"查詢資料",
+                text:'要查看此坐墊的紀錄資料嗎?',
+				showCancelButton: true,
+				confirmButtonText: '確定',
+				confirmButtonColor: '#4466f2',
+				cancelButtonText: '取消',
+				cancelButtonColor: '#efefef',
+				reverseButtons: true
+			}).then(result => {
+                if(result.value){
+                    let to = `/sensor/records/${row_data.id}`
+                    this.$router.push(to)
+                }
+            })
+            // this.$swal({
+            //     title:'🥺🥺哭阿🥺🥺',
+            //     type:'error',
+            //     text:'還沒做好拉🙃🥺🥺🥺'
+            // })
+            // console.log(row_data)
         }
     },
 

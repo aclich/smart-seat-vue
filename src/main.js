@@ -31,7 +31,8 @@ const api_server = axios.create({
   baseURL: baseURL,
   withCridentails: true,
   headers:{
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Methods': 'POST, DELETE, GET, HEAD, OPTIONS, PUT'
   }
 });
 export {api_server};

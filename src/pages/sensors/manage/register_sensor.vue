@@ -34,13 +34,13 @@ export default {
     },
     computed:{
         loading_state: function(){
-            console.log('listen vuex isLoading...')
+            // console.log('listen vuex isLoading...')
             return this.$store.state.isLoading
         }
     },
     watch:{
         loading_state(){
-            console.log('watched loading state changed')
+            // console.log('watched loading state changed')
         }
     },
     methods:{
