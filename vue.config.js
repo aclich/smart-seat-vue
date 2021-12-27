@@ -1,4 +1,6 @@
 module.exports = {
     baseUrl: "/",
-    publicPath: "/"
+    publicPath: process.env.NODE_ENV === 'production'
+    ? '/smart-seats-vue/'
+    : "/"
 };
