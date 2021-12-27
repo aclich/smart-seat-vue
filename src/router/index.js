@@ -311,7 +311,7 @@ const routes = [
 
 const router = new Router({
   routes,
-  base: '/',
+  base: process.env.BASE_PATH,
   mode: 'history',
   linkActiveClass: "active",
   scrollBehavior () {
@@ -331,7 +331,8 @@ router.beforeEach((to, from, next) => {
       text: 'Already login!',
       type: 'error'
     })
-    return next('/home/default')
+    router.push('/home/default')
+    return
   }
   else if (path.includes(to.path) && !isLogin){
     return next();
@@ -342,7 +343,8 @@ router.beforeEach((to, from, next) => {
       text: 'Please Login first!',
       type: 'error'
     })
-    return next('/auth/login');
+    router.push('/auth/login')
+    return;
   }else{
     return next()
   }
