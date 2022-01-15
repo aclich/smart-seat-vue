@@ -93,7 +93,7 @@
                             <input class="form-control" v-model="filters.time.value" placeholder="紀錄時間"/>
                         </div>
                         <div class="col-sm-2">
-                            <b-form-select class="form-control" v-model="filters.posture.value" :options="posture_map" placeholder="坐姿情況" />
+                            <b-form-select class="form-control" v-model="filters.posture.value" :options="posture_options" placeholder="坐姿情況" />
                         </div>
                     </div>
                     <div class='table-responsive vue-smart'>
@@ -137,15 +137,6 @@
 import { GChart } from 'vue-google-charts'
 import VueSlideBar from 'vue-slide-bar'
 import { api_server } from '@/main'
-var posture_map = {
-                "": "所有坐姿情況",
-                regular: "標準",
-                bias_left:"偏左",
-                bias_right:"偏右",
-                cross_left:"左腳翹二郎腿",
-                cross_right:"右腳翹二郎腿",
-                stand_on:"雙腳在椅子上",
-            }
 export default {
     components: { GChart, VueSlideBar },
     created(){
@@ -227,7 +218,23 @@ export default {
                 //     },
 				// ]
 			},
-            posture_map: posture_map,
+            posture_map: {
+                '': "所有坐姿情況",
+                regular: "標準",
+                bias_left:"偏左",
+                bias_right:"偏右",
+                cross_left:"左腳翹二郎腿",
+                cross_right:"右腳翹二郎腿",
+                stand_on:"雙腳在椅子上",
+            },
+            posture_options:[{value: '', text: "所有坐姿情況"},
+                             {value: 'regular', text: "標準"},
+                             {value: 'bias_left', text: "偏左"},
+                             {value: 'bias_right', text: "偏右"},
+                             {value: 'cross_left', text: "左腳翹二郎腿"},
+                             {value: 'cross_right', text: '右腳翹二郎腿'},
+                             {value: 'stand_on', text: "雙腳在椅子上"}],
+
             filter:{
 				currentPage: 1,
 				totalPages: 0,
