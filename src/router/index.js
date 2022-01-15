@@ -44,6 +44,7 @@ import ShowRecordData from '../pages/sensors/records/show_data'
 
 // Admin
 import UserManagement from '../pages/admin/user_management'
+import SeatTypeManagement from '../pages/admin/seat_type_management'
 
 // component
 import Home from '../pages/home'
@@ -261,7 +262,7 @@ const routes = [
     {
       path: 'seat-type-management',
       name: 'SeatTypeManagement',
-      component: Error404
+      component: SeatTypeManagement
     }
   ]
 },
