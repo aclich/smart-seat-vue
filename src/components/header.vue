@@ -1,6 +1,13 @@
 <template>
   <div>
     <!-- page-wrapper Start-->
+    <Breadcrumbs title="Seat Type Management"/>
+        <loading
+        loader="dots"
+        :active.sync="isloading"
+        :can-cancel="false"
+        :is-full-page="true"
+        ></loading>
     <div class="page-wrapper" id="canvas-bookmark">
       <!-- Page Header Start-->
       <div class="page-main-header" :class="{ open:toggle_sidebar_var }">
@@ -118,6 +125,7 @@ export default {
   name: 'Search',
   data() {
     return {
+      isloading: false,
       terms: '',
       searchResult: false,
       searchResultEmpty: false,
@@ -145,6 +153,7 @@ export default {
     },
     logout(){
             console.log('logout')
+            this.isloading = true
             var canLogout = false
             api_server.post('/auth/logout').then(response =>{
                 console.log(response.status)
@@ -170,6 +179,7 @@ export default {
                 })
                 
             }).finally(() =>{
+                this.isloading = false
                 window.sessionStorage.removeItem('userInfo')
                 this.$router.push('/auth/login')
             })
