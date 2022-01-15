@@ -319,8 +319,7 @@ const routes = [
 
 const router = new Router({
   routes,
-  base: process.env.BASE_PATH,
-  mode: 'history',
+  mode: 'hash',
   linkActiveClass: "active",
   scrollBehavior () {
     return { x: 0, y: 0 }
