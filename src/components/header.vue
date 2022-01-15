@@ -168,7 +168,9 @@ export default {
                     text: err,
                     type: 'error'
                 })
+                
             }).finally(() =>{
+                window.sessionStorage.removeItem('userInfo')
                 this.$router.push('/auth/login')
             })
       // firebase.auth().signOut().then(() => {

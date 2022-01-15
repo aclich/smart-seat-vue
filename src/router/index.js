@@ -48,7 +48,6 @@ import UserManagement from '../pages/admin/user_management'
 // component
 import Home from '../pages/home'
 import Sample2 from '../pages/sample_2'
-import Cookies from 'js-cookies'
 import Swal from 'sweetalert2'
 
 Vue.use(Router)
@@ -329,9 +328,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log("from", from.fullPath)
   console.log("to", to.fullPath)
-  let isLogin = Cookies.getItem('refresh_token') !=  null
+  let isLogin = window.sessionStorage.getItem("userInfo") !=  null
   const path = ['/auth/login','/auth/register'];
-  console.log(Cookies.getItem('refresh_token'), isLogin)
+  console.log(isLogin)
   if (path.includes(to.path) && isLogin){
     Swal.fire({
       title: 'Route error',

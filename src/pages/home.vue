@@ -40,10 +40,11 @@ export default {
             this.seat_info = res.data.data
         }).catch(err=>{
             console.log(err)
+            let err_text = (err.response.status == 500 ? '連線不穩定，請重新整理!' : err.response.data.message)
             this.$swal({
                 title: '發生錯誤',
                 type: 'error',
-                text: '連線不穩定，請重新整理!'
+                text: err_text
             })
         })
     },
