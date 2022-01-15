@@ -249,7 +249,8 @@ export default {
             }
         },
         getpath() {
-            let filename = `${this.record_data_info.type}_${this.select_record.posture}.png` 
+            let seat_type = (this.record_data_info.type > 2) ? 1 : this.record_data_info.type 
+            let filename = `${seat_type}_${this.select_record.posture}.png` 
             return require("@/assets/images/smart_seat_img/" + filename);
         },
         adjust_pie_chart(){

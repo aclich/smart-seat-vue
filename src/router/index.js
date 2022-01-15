@@ -42,6 +42,9 @@ import CheckSeatRecord from '../pages/sensors/records/check_records'
 import SeatRecordList from '../pages/sensors/records/component/record_list'
 import ShowRecordData from '../pages/sensors/records/show_data'
 
+// Admin
+import UserManagement from '../pages/admin/user_management'
+
 // component
 import Home from '../pages/home'
 import Sample2 from '../pages/sample_2'
@@ -254,6 +257,11 @@ const routes = [
     {
       path: 'user_management',
       name: 'UserManagement',
+      component: UserManagement
+    },
+    {
+      path: 'seat-type-management',
+      name: 'SeatTypeManagement',
       component: Error404
     }
   ]

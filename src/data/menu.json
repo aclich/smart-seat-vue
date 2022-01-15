@@ -13,7 +13,8 @@
         },
         {
           "title": "Administration", "icon": "unlock", "type": "sub", "permission":1, "active": false, "children": [
-            { "path": "/admin/user_management", "title": "User Management", "type": "link" }
+            { "path": "/admin/user_management", "title": "User Management", "type": "link" },
+            { "path": "/admin/seat-type-management", "title": "Seat Type Management", "type": "link" }
           ]
         },
         {
