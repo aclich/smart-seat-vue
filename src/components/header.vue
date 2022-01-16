@@ -1,7 +1,6 @@
 <template>
   <div>
     <!-- page-wrapper Start-->
-    <Breadcrumbs title="Seat Type Management"/>
         <loading
         loader="dots"
         :active.sync="isloading"

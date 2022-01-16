@@ -30,7 +30,7 @@ import ResetPassword from '../pages/authentication/reset_password'
 
 /* User Profile */
 import UserProfile from '../pages/users/profile'
-// import UserEditProfile from '../pages/users/edit-profile'
+import UserEditProfile from '../pages/users/edit-profile'
 import UserCards from '../pages/users/cards'
 
 /* Super user */
@@ -234,8 +234,8 @@ const routes = [
     {
       path: 'edit',
       name: 'UserEditProfile',
-      // component:UserEditProfile,
-      component: Error404,
+      component:UserEditProfile,
+      // component: Error404,
        meta: {
         title: 'serEditProfile | Endless - Premium Admin Template',
       }
