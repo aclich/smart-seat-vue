@@ -20,7 +20,7 @@
                             <b-form-select v-else v-model="data.item.user_role" :options="options" class="w-75"></b-form-select>
                         </template>
                     </b-table>
-                    <b-button class="btn btn-success btn-ms m-1" @click="save_change()"><i class="fa fa-pencil"></i>儲存</b-button>
+                    <b-button v-if="userinfo.userrole=='sa'" class="btn btn-success btn-ms m-1" @click="save_change()"><i class="fa fa-pencil"></i>儲存</b-button>
                 </div>
             </div>
             </div>               

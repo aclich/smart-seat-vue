@@ -43,7 +43,9 @@
                         <div class='card-header'>
                             <h5>Result</h5>
                         <div class='card-body'>
-                            <b-table striped small hover :items="sql_data"></b-table>
+                            <div class="table-responsive mb-0">
+                                <b-table striped small hover :items="sql_data" class="table-sm"></b-table>
+                            </div>
                         </div>
                         </div>
                     </div>
