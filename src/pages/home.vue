@@ -14,7 +14,7 @@
             <div class='col-xl-8 xl-100'>
                 <div class="card">
                     <div class="card-header typography">
-                        <p class="h5 txt-primary">歡迎來到壓力坐墊紀錄系統, <small>{{ userinfo.username }} !</small></p>
+                        <p class="h5 txt-primary">嗨<small>{{ userinfo.username }}</small>, 歡迎來到壓力坐墊紀錄系統! </p>
                         <p>您一共有 <span class="txt-danger">{{ seat_info.seat_count }}</span> 個坐墊，共記錄了 <span class="txt-danger">{{ seat_info.record_count }}</span> 筆記錄!</p>
                     </div>
                 </div>

@@ -41,9 +41,16 @@
                     <div class="col" itemscope itemprop="thumbnail" align='center'>
                         <b-row>
                             <b-col md="7">
-                                <a>
+                                <!-- <a>
                                     <img :src="getpath()" class="img-thumbnail" alt="Image description" />
-                                </a>
+                                </a> -->
+                                <table class="table" id="dtable" style="border-collapse: collapse;">
+                                    <tbody>
+                                        <tr v-for="row in rows" :key="row" >
+                                            <td v-bind:style="{'background-color': color(col), 'border': '1px solid #333'}" v-for="col in row" :key="col">{{ }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </b-col>
                             <b-col align='left' align-self="end">
                                 <div class="caption">
@@ -69,9 +76,9 @@
                         <p class="h5 txt-success">坐姿統計</p>
                         <span>統計整體坐姿的情況</span>
                     </div>
-                    <div class="card-body chart-block">
+                    <div class="card-body chart-pie">
                      <GChart
-                      class="chart-overflow" 
+                      class="chart-pie" 
                       id="pie-chart2"
                       type="PieChart"
                       :data="pie_chart.chartData"
@@ -141,8 +148,24 @@ export default {
     components: { GChart, VueSlideBar },
     created(){
         this.get_record_data()
-        this.adjust_pie_chart()
+        // this.adjust_pie_chart()
     },
+    // mounted(){
+    //     let tb_width = document.getElementById('dtable').rows[0].offsetWidth
+    //     this.observer = new MutationObserver((mutations) =>{
+    //         mutations.forEach(mutation =>{
+    //             if (mutation){
+    //                 console.log("tb changed")
+    //                 this.settableheight('dtable')
+    //                 this.adjust_pie_chart()
+    //             }
+    //         });
+    //     });
+    //     this.observer.observe(tb_width, {childList: true, characterData: true, attributes: true})
+    // },
+    // beforeDestroy(){
+    //     this.observer.disconnect()
+    // },
     computed:{
         loading_state: function(){
             return this.$store.state.isLoading
@@ -154,10 +177,21 @@ export default {
     watch:{
         selected_slider: function(){
             this.select_record = this.records_slider[this.slider.value]
+            this.rows = this.reshape_rows(this.select_record.data)
+            this.settableheight('dtable')
+            this.adjust_pie_chart()
         }
     },
     data(){
         return {
+            observer: null,
+            rows: [
+                // [10, 20, 40, 60, 34],
+                // [102, 62, 83, 19, 44],
+                // [1, 9, 11, 30, 72],
+                // [1, 9, 11, 30, 99],
+                // [1, 9, 11, 107, 72],
+            ],
             record_data_info:{
                 seat_id: this.$route.params.id,
                 // seat_name: "test seat",
@@ -250,6 +284,27 @@ export default {
         }
     },
     methods:{
+        color: function(col) {
+            const scale = 0.499
+            if (col <= 512){
+                if (col <= 0) return `#00FF00`
+                return `#${parseInt(col *scale).toString(16).padStart(2, '0')}FF00`.toUpperCase()
+            }else{
+                if (col >= 1026) return `#FF0000`
+                var diff = 255 - parseInt((col-512)*scale)
+                return `#FF${diff.toString(16).padStart(2, '0')}00`.toUpperCase()
+            }
+        },
+        reshape_rows: function(data) {
+            var data_arr = data.slice(1,data.length-1).split(',').map(i => parseInt(i))
+            var n_data = []
+            while(data_arr.length) n_data.push(data_arr.splice(0,5))
+            return n_data
+        },
+        settableheight: function(id) {
+            var tb = document.getElementById(id)
+            tb.style.height = tb.rows[0].cells[0].offsetWidth * tb.rows.length + 'px'
+        },
         setimagesparth() {
             for (var i = 0; i < this.biglightgallery.length; i++) {
                 this.biglightgallery[i] = this.getbigimgpath(this.biglightgallery[i]);
@@ -261,7 +316,8 @@ export default {
             return require("@/assets/images/smart_seat_img/" + filename);
         },
         adjust_pie_chart(){
-            this.pie_chart.options.height = (this.record_data_info.type == 1) ? 494 : 494
+            // this.pie_chart.options.height = (this.record_data_info.type == 1) ? 494 : 494
+            this.pie_chart.options.height = document.getElementById('dtable').rows[0].offsetHeight*5 + 100
         },
         get_record_data(){
             let data_type = this.$route.params.data_type
@@ -293,6 +349,8 @@ export default {
                     text: err.response.message
                 })
             }).finally(() =>{
+                this.settableheight('dtable')
+                this.adjust_pie_chart()
                 this.$store.commit("change_loading_state", false)
             })
         },
