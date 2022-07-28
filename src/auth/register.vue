@@ -14,7 +14,7 @@
                     <div class="col-sm-12 p-0">
                         <div class="auth-innerright">
                             <div class="authentication-box">
-                                <div class="text-center"><img width=250 src="../assets/images/1280px-Sword_Art_Online_anime_logo.svg.png" alt=""></div>
+                                <div class="text-center"><img width=250 src="../assets/images/Smart-Seat_logo.png" alt=""></div>
                                 <div class="card mt-4 p-4">
                                     <h4 class="text-center">NEW USER</h4>
                                     <h6 class="text-center">Enter your Username and Password For Signup</h6>

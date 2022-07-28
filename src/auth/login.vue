@@ -14,7 +14,7 @@
                     <div class="col-md-12">
                         <div class="auth-innerright">
                             <div class="authentication-box">
-                                <div class="text-center"><img alt="" width="250" height="" src="../assets/images/1280px-Sword_Art_Online_anime_logo.svg.png"></div>
+                                <div class="text-center"><img alt="" width="250" height="" src="../assets/images/Smart-Seat_logo.png"></div>
                                 <div class="card mt-4">
                                     <div class="card-body">
                                         <div class="text-center">

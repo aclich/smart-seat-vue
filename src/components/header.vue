@@ -12,7 +12,7 @@
       <div class="page-main-header" :class="{ open:toggle_sidebar_var }">
         <div class="main-header-right row">
           <div class="main-header-left d-lg-none">
-            <div class="logo-wrapper"><router-link :to="{ name: 'default'}" ><img width=200 src="../assets/images/1280px-Sword_Art_Online_anime_logo.svg.png" alt=""></router-link></div>
+            <div class="logo-wrapper"><router-link :to="{ name: 'default'}" ><img width=200 src="../assets/images/Smart-Seat_logo.png" alt=""></router-link></div>
           </div>
           <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">

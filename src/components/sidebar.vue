@@ -3,7 +3,7 @@
     <div class="main-header-left d-none d-lg-block">
       <div class="logo-wrapper">
         <router-link to="/">
-          <img width="200" src="../assets/images/1280px-Sword_Art_Online_anime_logo.svg.png" alt />
+          <img width="200" src="../assets/images/Smart-Seat_logo.png" alt />
         </router-link>
       </div>
     </div>
